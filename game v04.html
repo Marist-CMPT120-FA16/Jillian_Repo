@@ -78,11 +78,12 @@
                currentLoc = 0;
             } else if (currentLoc === 1) {
                 currentLoc = 5;
+                document.getElementById ("EastButton").disabled=true;
             } else if (currentLoc === 3) {
                 currentLoc = 6;
             } else {
-              if (currentLoc === 0) {
-                 currentLoc = 2;
+              		if (currentLoc === 0) {
+                currentLoc = 2;
               }
             }
             look();
@@ -103,10 +104,31 @@
 			var userInput = document.getElementById *("textCommand").value;
 			userInput = userInput.trim()
 			userInput = userInput.toLowerCase
-			userInput = userInput.substr(0,1)
-			displayMessage(userInput);
+			userInput = userInput.substr(0,1) //the point of this whole section is to transform the user's input into a command that the script can actually interpret
+			// displayMessage(userInput); 
+			{function 
+				if (userInput === "n") {
+					northButton_click()
+				} else {
+					if (userInput === "s") {
+					southButton_click()	
+					}
+					else {
+					if (userInput === "e") {
+					eastButton_click()	
+					}	
+					else {
+					if (userInput === "w")
+						westButton_click()
+					}
+					}
+					
+				}
+			}
+					
+					
+				}
 			
-		}
          
          // story descriptions
          // each case is a different location
@@ -175,7 +197,7 @@
          }
       </script>
    </head>
-   <body onload="init();"> 
+   <body onload= "init()";> 
    
    <!-- the initialization function is the reasont that the location 0 text displays on load -->
    
@@ -196,10 +218,10 @@
        		onclick = "goButton_click();"/>
 
        <br>
-       <input type="button" value="North" onclick="northButton_click();">
-       <input type="button" value="South" onclick="southButton_click();">
-       <input type="button" value="East" onclick="eastButton_click();">
-       <input type="button" value="West" onclick="westButton_click();">
+       <input id= "NorthButton" type="button" value="North" onclick="northButton_click();">
+       <input id="SouthButton" type="button" value="South" onclick="southButton_click();">
+       <input id="EastButton" type="button" value="East" onclick="eastButton_click();">
+       <input id="WestButton" type="button" value="West" onclick="westButton_click();">
     
     <br>
 	    
