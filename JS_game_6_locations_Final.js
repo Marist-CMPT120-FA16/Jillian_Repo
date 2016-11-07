@@ -47,11 +47,11 @@
 	}
 	
 	function ramen() {
-		var locationDescription = "You're in the ramen aisle. There are a bunch of college kids here.";
+		var locationDescription = "9. You're in the ramen aisle. There are a bunch of college kids here.";
 		return locationDescription;
 	}
 	
 	function veggie() {
-		var locationDescription = "You're in the vegetable section. Looks like there's plenty of kale left.";
+		var locationDescription = "10. You're in the vegetable section. Looks like there's plenty of kale left.";
 		return locationDescription;
 	}

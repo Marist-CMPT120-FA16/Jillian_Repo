@@ -54,9 +54,11 @@
          var cartCommand = "cart";
          var takeCommand = "take";
          
-         var helpCommandTrim = "h";
-         var cartCommandTrim = "c";
-         var takeCommandTrim = "t";
+        // These variables are part of a function that I am not currently using - it wasn't working the way I wanted it to
+         
+        // var helpCommandTrim = "h";
+        // var cartCommandTrim = "c";
+        // var takeCommandTrim = "t";
          
          // This array lists the available commands so that the player can see them if they click or type "help"
          
@@ -112,7 +114,6 @@
 				}
 			  look();
 			}
-
          function southButton_click() {
 				if (currentLoc === 0) {
 			         currentLoc = 3;
@@ -135,7 +136,6 @@
 				}
 			  look();
 			}
-
          function eastButton_click() {
 				if (currentLoc === 0) {
 			         currentLoc = 2;
@@ -151,12 +151,11 @@
 					currentLoc = 6;
 				} else if (currentLoc === 9) {
 					currentLoc = 10;
-			///	} else if (currentLoc === 2 || 5 || 6 || 10) {
+			//	} else if (currentLoc === 2 || 5 || 6 || 10) {
 			//		displayMessage("You cannot go that way.");
 				}
 			  look();
 			}
-
          function westButton_click() {
 				if (currentLoc === 0) {
 			         currentLoc = 4;
@@ -186,26 +185,50 @@
        		userInput = userInput.trim();
        		userInput = userInput.toLowerCase();
        		userInput = userInput.substr(0,1); 
-       		switch(userInput) {
-       			case northCommand: northButton_click();
-       			case southCommand: southButton_click();
-       			case eastCommand: eastButton_click();
-       			case westCommand: westButton_click();
-       			break;
-       			case helpCommandTrim:
-       				help();
-       			break;
-       			case cartCommandTrim:
-       			displayCart();
-       			case takeCommandTrim:
-       			take();
-       			break;
-       				default:
-		       			displayMessage("That is not a valid command. Valid commands are: " + commands)
-		       	break;
-       		}
-       		textCommand.value = "";
-        } 
+ 
+       		if (userInput ==="n") {
+				northButton_click()
+			} else if (userInput === "s") {
+				southButton_click()
+			} else if (userInput === "e") {
+				eastButton_click()
+			} else if (userInput === "w") {
+				westButton_click()
+			} else if (userInput === "h") {
+				helpButton_click();
+			} else if (userInput === "c") {
+				displayCart();
+			} else if (userInput === "t") {
+				takeButton_click();
+			} else {
+			    displayMessage("Please enter a valid command. Valid commands are: N, S, E, W, n, s, e, w, help, take, cart");
+		} textCommand.value = "";
+     } 
+		 
+		 // I had set up a switch-case for the text commands, but they weren't working properly
+		 // They were sending the player to multiple locations with each click, and didn't make sense
+		 // I couldn't figure out why it was doing this, so I brought back the if/else navigation setup from my previous version 
+		 
+       	//	switch(userInput) {
+       			//case northCommand: northButton_click();
+       			//case southCommand: southButton_click();
+       			//case eastCommand: eastButton_click();
+       			//case westCommand: westButton_click();
+       			//break;
+       			//case helpCommandTrim:
+       		//		help();
+       		//	break;
+       			//case cartCommandTrim:
+       			//displayCart();
+       			//case takeCommandTrim:
+       			//take();
+       			//break;
+       			//	default:
+		       //			displayMessage("That is not a valid command. Valid commands are: " + commands)
+		     //  	break;
+       	//	}
+       	//	textCommand.value = "";
+      //  } 
         
         function helpButton_click() {
      	   help();
@@ -317,7 +340,6 @@
             message = message + "\n" + "Score: " + score ;
             displayMessage(message);
          }
-
          // Each location adds 5 points to the score, but only when that location is visited for the first time
          // At the same time that the score is added, "hasVisitedLocX" becomes true - this prevents the +5 from being added repeatedly
          // The score add is conditional on the "hasVisitedLocX" being false
@@ -398,8 +420,6 @@
       			 	displayMessage("You put the Pringles in your cart.");
       		  }
       		}
-
-
          
          // Utility function
          // Responsible for the text area's display of the game messages
