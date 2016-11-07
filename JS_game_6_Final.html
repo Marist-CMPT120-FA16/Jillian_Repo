@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <!-- Jillian Srygley
 	CMPT 120L-200 
-	Assignment 2 Game v0.2
-	September 26, 2016 -->
+	Assignment 4 Game v0.6
+	November 7, 2016 -->
 <html><head ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 	<link rel="stylesheet" type="text/css" href="game stylesheet.css">
@@ -44,6 +44,8 @@
          var hasVisitedLoc7 = false; 
          var hasVisitedLoc8 = false; 
          
+         // These variables are important - the game uses them to interpret player input in the command bar
+         
          var northCommand = "n";
          var southCommand = "s";
          var eastCommand = "e";
@@ -52,8 +54,16 @@
          var cartCommand = "cart";
          var takeCommand = "take";
          
+         var helpCommandTrim = "h";
+         var cartCommandTrim = "c";
+         var takeCommandTrim = "t";
+         
+         // This array lists the available commands so that the player can see them if they click or type "help"
+         
          var commands = [ northCommand, southCommand, eastCommand, westCommand, helpCommand, cartCommand, takeCommand ];
          var validCommands = "Valid commands are:\n\n" + commands.toString();
+         
+         // This array represents the player's inventory
          
          var cart = ["coupon"];
          
@@ -76,7 +86,6 @@
             look();
          }
          
-         //
          // North, South, East, and West button event handlers
          // They define what will happen when each button is clicked
          // I added the four new locations by inputting more possibilities for the "if/else"s
@@ -98,6 +107,8 @@
 					currentLoc = 7;
 				} else if (currentLoc === 10) {
 					currentLoc = 3;
+				//} else if (currentLoc === 8 || 1 || 5) {
+				//	displayMessage("You cannot go that way.");
 				}
 			  look();
 			}
@@ -119,6 +130,8 @@
 					currentLoc = 9;
 				} else if (currentLoc === 3) {
 					currentLoc = 10;
+			//	} else if (currentLoc === 9 || 10 || 6) {
+			//		displayMessage("You cannot go that way.");
 				}
 			  look();
 			}
@@ -138,6 +151,8 @@
 					currentLoc = 6;
 				} else if (currentLoc === 9) {
 					currentLoc = 10;
+			///	} else if (currentLoc === 2 || 5 || 6 || 10) {
+			//		displayMessage("You cannot go that way.");
 				}
 			  look();
 			}
@@ -157,34 +172,37 @@
 					currentLoc = 7;
 				} else if (currentLoc === 10) {
 					currentLoc = 9;
+			//	} else if (currentLoc === 8 || 4 || 7 || 9) {
+			//		displayMessage("You cannot go that way.");
 				}
 			  look();
 			}
          
 		 // When the user clicks "Go", this funtion retrieves their input from the command bar
-		 // It trims and lowercases it, then looks at the first letter
+		 // It trims and lowercases it, then compares it to the list of valid commands to see what to do
 		 
          function goButton_click() {
        		var userInput = document.getElementById("textCommand").value;
-       		userInput = userInput.trim()
-       		userInput = userInput.toLowerCase()
+       		userInput = userInput.trim();
+       		userInput = userInput.toLowerCase();
+       		userInput = userInput.substr(0,1); 
        		switch(userInput) {
        			case northCommand: northButton_click();
        			case southCommand: southButton_click();
        			case eastCommand: eastButton_click();
        			case westCommand: westButton_click();
        			break;
-       		case helpCommand:
+       			case helpCommandTrim:
        				help();
        			break;
-       		case cartCommand:
+       			case cartCommandTrim:
        			displayCart();
-       		case takeCommand:
+       			case takeCommandTrim:
        			take();
        			break;
-       		default:
-       			displayMessage("That is not a valid command. Valid commands are: " + commands)
-       			break;
+       				default:
+		       			displayMessage("That is not a valid command. Valid commands are: " + commands)
+		       	break;
        		}
        		textCommand.value = "";
         } 
@@ -201,10 +219,14 @@
      	   displayCart();
         }
          
+        // The purpose of the help command is to display the game's valid commands to the player
         
         function help() {
      	   displayMessage("Need help in Aisle 12? Valid commands are " + commands)
         }
+         
+        // "Cart" is an array. When an item is picked up, it is pushed into the cart and will no longer show up in the game's location. 
+        // To display the player's cart, this function shows the cart array's contents
         
         function displayCart() {
      	   displayMessage("Your cart contains: " + cart);
@@ -214,9 +236,8 @@
          // The message variable is each case's message AND "Score: score"
 		 // The score displays on the next line due to the "\n"
 		 // The HTML buttons are enabled or disabled based on the individual locations
-		 // I realize this is a brute force way of implementing this feature, hoping to find a simpler solution for the next version
-		 // Also, the buttons cannot be pushed if they're grey but their corresponding text commands can be used. 
-		 //If the user feels that strongly that they want to move in a greyed-out direction, they can knock themselves out
+		 
+		 // The items only appear if they have not already been placed in the cart by the player. 
                   
          function look() {
             var message = "";
@@ -334,6 +355,9 @@
      }           
           }
          
+         // This function enables the player to take, or not take, items
+         // It only allows the player to take the item if they are in the correct location and have not already taken it
+         
           function take() {
        	   if (currentLoc === 3 && bananaCount < 1) {
        		   takeBanana();
@@ -348,6 +372,8 @@
        		   displayMessage("There's nothing here to take.");
        	   }
           }
+         
+         // Each item has its own take function. The itemCount ensures that the player can only collect the item once, and it is only added to the cart once
          
           function takeBanana() {
        	  	  bananaCount += 1; 
@@ -374,10 +400,11 @@
       		}
 
 
-         //
+         
          // Utility function
          // Responsible for the text area's display of the game messages
-         //
+         
+         
          function displayMessage(msg) {
             var target = document.getElementById("taMain");
             target.value = msg + "\n\n" + target.value;
