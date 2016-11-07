@@ -10,7 +10,7 @@
   </head>
   <body>
 		<head>
-		<link href="https://fonts.googleapis.com/css?family=Creepster" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet">
 		</head>
 
 	 <style>
@@ -19,15 +19,15 @@
 	  h1 {
 	  color: orange;
 	  text-shadow: 1.5px 1.5px gray;
-	  font-family: 'Creepster', cursive;
+	  font-family: 'Fontdiner Swanky', cursive;
 	  font-size: 48px;
 	  letter-spacing: 2px;
 	  }
 	  
 	  .header h1 {
-	  color: orange;
+	  color: red;
 	  text-shadow: 1.5px 1.5px gray;
-	  font-family: 'Creepster', cursive;
+	  font-family: 'Fontdiner Swanky', cursive;
 	  font-size: 48px;
 	  letter-spacing: 2px;
 	  }
@@ -39,17 +39,20 @@
 	  textarea {
 	  font-family: "Comic Sans MS", cursive, sans-serif;
 	  color: purple;
+	  border: 3px solid #510000;
 	  }
 	  
 	  body {
-	  background-color: black;
-	  color: white;
-	  font-family: 'Creepster', cursive;
+      background-image: url("http://images.clipartlogo.com/files/ss/thumb/113/113254948/autumn-leaves-light-seamless_small.jpg");
+      background-repeat: repeat;
+	  background-color: #e8ab97;
+	  color: #5a2e2e;
+	  font-family: 'Fontdiner Swanky', cursive;
 	  letter-spacing: 2px;
 	  }
 	  
 	  a {
-	  color: orange;
+	  color: red;
 	  }
 	  
 	  a:hover {
